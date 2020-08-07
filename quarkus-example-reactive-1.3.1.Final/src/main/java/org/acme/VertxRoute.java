@@ -27,7 +27,7 @@ public class VertxRoute {
 
 	@Route(path = "/hello/:name", methods = HttpMethod.GET)
 	void greetings(RoutingExchange ex) {
-		Set<ConstraintViolation<RequestObj>> violations = validator.validate(new RequestWrapper(ex.getParam("name").get()));
+		Set<ConstraintViolation<RequestWrapper>> violations = validator.validate(new RequestWrapper(ex.getParam("name").get()));
 		if( violations.size() == 0) {
 			ex.ok(messageService.sayHello(ex.getParam("name").orElse("world")));
 		} else {
